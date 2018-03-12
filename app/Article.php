@@ -21,13 +21,24 @@ class Article extends Model
   }
 
       // Polymorphic relation with categories
-    public function categories()
+  public function categories()
     {
-    return $this->morphToMany('App\Category', 'categoryable');
+  return $this->morphToMany('App\Category', 'categoryable');
     }
 
-    public function scopeLastArticles($query, $count)
+  public function scopeLastArticles($query, $count)
     {
-    return $query->orderBy('created_at', 'desc')->take($count)->get();
+  return $query->orderBy('created_at', 'desc')->take($count)->get();
+    }
+    /**
+     * Поиск по записям блога
+     */
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('title', 'like', '%'.$search.'%')
+                      ->orWhere('description_short', 'like', '%'.$search.'%')
+                      ->orWhere('description', 'like', '%'.$search.'%')
+                      ->orWhere('meta_description', 'like', '%'.$search.'%')
+                      ->orWhere('meta_keyword', 'like', '%'.$search.'%');
     }
 }
