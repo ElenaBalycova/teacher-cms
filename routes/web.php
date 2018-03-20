@@ -19,6 +19,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('/', 'DashboardController@dashboard')->name('admin.index');
     Route::resource('/category', 'CategoryController', ['as'=>'admin']);
     Route::resource('/article', 'ArticleController', ['as'=>'admin']);
+    Route::resource('/page', 'PageController', ['as'=>'admin']);
     Route::group(['prefix' => 'user_management', 'namespace' => 'UserManagement'], function () {
       Route::resource('/user', 'UserController', ['as' => 'admin.user_management']);
     });
@@ -51,3 +52,4 @@ $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/blog/page/{slug?}', 'BlogController@page')->name('page');

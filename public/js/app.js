@@ -985,6 +985,11 @@ $(document).ready(function () {
   CKEDITOR.replace('description');
 });
 
+// CKEDITOR for Page
+$(document).ready(function () {
+  CKEDITOR.replace('description_page');
+});
+
 window.Vue = __webpack_require__(35);
 
 /**
